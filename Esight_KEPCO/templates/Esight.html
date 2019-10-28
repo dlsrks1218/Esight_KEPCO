@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to E-sight</title>
+
+    <!-- saved from url=(0013)about:internet -->
+
+    <!-- icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Heebo|Noto+Sans+KR" rel="stylesheet">
+
+    <!-- user style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='portfolio.css') }}">
+
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- bokeh -->
+     <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+     <script type="text/javascript">
+        Bokeh.set_log_level("info");
+     </script>
+  <body>
+
+    <header class="header-area navbar-fade" id="header">
+      <nav class="navbar">
+        <a class="navbar-brand" id="navbarBrand">E-sight</a>
+        <a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
+        <div class="navbar-menu" id="menu">
+          <div class="nav-item"><a class="nav-link" id="navbarAbout">시간별 평균 활동</a></div>
+          <div class="nav-item"><a class="nav-link" id="navbarDay">일일 평균 활동</a></div>
+          <div class="nav-item"><a class="nav-link" id="navbarService">지역별 평균 활동</a></div>
+          <div class="nav-item"><a class="nav-link" id="navbarPortfolio">가전제품 소비 패턴</a></div>
+          <div class="nav-item"><a class="nav-link" id="navbarPrediction">가전제품 소비 패턴 예측</a></div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="section-container">
+      <div class="welcome-area">
+        <div class="container">
+          <div class="image-slide fade">
+            <img src="{{ url_for('static', filename='img/night-1085846_1920.jpg') }}">
+          </div>
+          <div class="image-slide fade">
+            <img src="{{ url_for('static', filename='img/security-2168233_1920.jpg') }}">
+          </div>
+          <div class="image-slide fade">
+            <img src="{{ url_for('static', filename='img/office-3295556_1920.jpg') }}">
+          </div>
+          <div class="image-slide fade">
+            <img src="{{ url_for('static', filename='img/light-bulb-4297600_1920.jpg') }}">
+          </div>
+
+          <a class="image-prev" id="imagePrev">&#10094;</a>
+          <a class="image-next" id="imageNext">&#10095;</a>
+
+          <div class="dots">
+            <span class="dot" id="firstDot"></span>
+            <span class="dot" id="secondDot"></span>
+            <span class="dot" id="thirdDot"></span>
+            <span class="dot" id="forthDot"></span>
+          </div>
+
+        </div>
+      </div>
+
+
+      <section class="about-area" id="about">
+        <div class="title">
+          시간별 평균 활동
+        </div>
+        <div class="container">
+          <input name = "1" id="input-date" type="date" value="2011-04-10">
+        </div>
+        <div id="output1">
+          {{ div_bok|safe }}
+          {{ script_bok|safe }}
+        </div>
+      </section>
+
+      <section class="day-area" id = "day">
+        <div class="title">
+          일일 평균 활동
+        </div>
+        <div class="container">
+          <input name = "4" id="input-date" type="date" value="2011-04-10">
+        </div>
+        <div id="output4">
+          {{ div_bok|safe }}
+          {{ script_bok|safe }}
+        </div>
+      </section>
+
+      <section class="services-area" id="service">
+        <div class="title">
+          지역별 평균 활동
+        </div>
+        <div class="container">
+            <input name = "2" id="input-date" type="date" value="2011-04-10">
+        </div>
+        <div id="output2">
+          {{ div_bok|safe }}
+          {{ script_bok|safe }}
+        </div>
+      </section>
+
+      <section class="portfolio-area" id="portfolio">
+        <div class="title">
+            가전제품 소비 패턴
+        </div>
+        <div class="container">
+          <input name = "3" id="input-date" type="date" value="2011-04-10">
+        </div>
+        <div class="filter">
+          <ul class="list">
+            <li class="listItem active" id="fridge">
+              Fridge
+            </li>
+            <li class="listItem" id="light">
+              Light
+            </li>
+            <li class="listItem" id="microwave">
+              Microwave
+            </li>
+            <li class="listItem" id="electric oven">
+              Electric Oven
+            </li>
+            <li class="listItem" id="washer dryer">
+              Washer Dryer
+            </li>
+            <li class="listItem" id="dish washer">
+              Dish Washer
+            </li>
+            <li class="listItem" id="electric space heater">
+              Electric Space Heater
+            </li>
+          </ul>
+        </div>
+        <div id="output3">
+          {{ div_bok|safe }}
+          {{ script_bok|safe }}
+        </div>
+      </section>
+
+      <section class="prediction-area" id="prediction">
+        <div class="title">
+            가전제품 소비 패턴 예측
+        </div>
+        <div class="filter">
+          <ul class="list">
+            <li class="listItem active" id="fridge2">
+              Fridge
+            </li>
+            <li class="listItem" id="light2">
+              Light
+            </li>
+            <li class="listItem" id="microwave2">
+              Microwave
+            </li>
+            <li class="listItem" id="electric oven2">
+              Electric Oven
+            </li>
+            <li class="listItem" id="washer dryer2">
+              Washer Dryer
+            </li>
+            <li class="listItem" id="dish washer2">
+              Dish Washer
+            </li>
+            <li class="listItem" id="electric space heater2">
+              Electric Space Heater
+            </li>
+          </ul>
+        </div>
+        <div id="output5">
+        </div>
+      </section>
+
+
+      <section class="review-area" id = "review">
+          <div class="title">
+            맞춤 데이터 제공
+          </div>
+          <div class="picture">
+            <img src="{{ url_for('static', filename='img/KakaoTalk_20191022_175700911.jpg') }}">
+            <div class="name">E-sight</div>
+            <div class="description">JUNIOR DEVELOPERS</div>
+          </div>
+          <div class="text">
+            <div class="intro">
+              안녕하세요. E-sight입니다.<br/>
+              원하시는 통계 데이터를 아래 메일로 보내주시면 답신하겠습니다.<br/>
+              감사합니다.
+            </div>
+            <ul>
+              <li>
+                <div class="info">
+                  <i class="far fa-calendar-alt"></i> 26st October, 2019 ~
+                </div>
+              </li>
+              <li>
+                <div class="info">
+                  <i class="fa fa-phone"></i> +82 10-6246-6900
+                </div>
+              </li>
+              <li>
+                <div class="info">
+                  <i class="fa fa-envelope"></i> moonsumhi@gmail.com
+                </div>
+              </li>
+              <li>
+                <div class="info">
+                  <i class="fa fa-home"></i> Sangmyung university, Seoul, Republic of Korea
+                </div>
+              </li>
+            </ul>
+            <div class="sns">
+              <a>
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a>
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a>
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a>
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+              <a>
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+      </section>
+    </div>
+
+    <footer class="footer-area">
+      <div class="sns">
+        <div class="item" id="facebook"><i class="fab fa-facebook-square"></i></div>
+        <div class="item" id="twitter"><i class="fab fa-twitter"></i></div>
+        <div class="item" id="linkedin"><i class="fab fa-linkedin"></i></div>
+        <div class="item" id="google"><i class="fab fa-google-plus"></i></div>
+        <div class="item" id="instagram"><i class="fab fa-instagram"></i></div>
+      </div>
+      <div class="info">
+        <p>Copyright ⓒ 2019 Moonsum Corp. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div id="portfolioModal" class="modal">
+      <span class="close" id="modalClose">&times;</span>
+      <div class="container">
+        <img id="modalImage">
+        <div id="modalMain" class="modal-main"></div>
+        <div id="modalSub" class="modal-sub"></div>
+        <div id="modalText" class="modal-text"></div>
+      </div>
+
+    </div>
+    <!-- user script -->
+    <script src="{{ url_for('static', filename='portfolio.js') }}"></script>
+  </body>
+</html>
